@@ -17,8 +17,6 @@ The application will handle **millions of requests per day**, so your solution s
 - `Transaction` model and migration
 - SQLite-based database for quick setup
 - Factory and seeder to create users and transactions
-- Stubbed route and controller files
-- Stubbed scheduled command for data aggregation
 
 ---
 
