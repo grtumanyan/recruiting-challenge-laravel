@@ -22,11 +22,10 @@ The application will handle **millions of requests per day**, so your solution s
 
 ## 🔧 Setup Instructions
 
-1. **Clone the repository**
-    ```bash
-    git clone https://github.com/spiriidk/recruiting-challenge-laravel.git
-    cd recruiting-challenge-laravel
-    ```
+1. **Fork the repository**
+
+   Fork the repository and navigate to the project folder
+
 
 2. **Install dependencies**
     ```bash
