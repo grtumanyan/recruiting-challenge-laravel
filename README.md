@@ -24,8 +24,8 @@ The application will handle **millions of requests per day**, so your solution s
 
 1. **Clone the repository**
     ```bash
-    git clone https://github.com/your-org/laravel-backend-challenge.git
-    cd laravel-backend-challenge
+    git clone https://github.com/spiriidk/recruiting-challenge-laravel.git
+    cd recruiting-challenge-laravel
     ```
 
 2. **Install dependencies**
