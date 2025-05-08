@@ -1,22 +1,52 @@
-# 🧪 Backend Developer Challenge – Laravel 10 Boilerplate
+## 💼 Payout System Overview
 
-Welcome! This is the starting point for your backend coding challenge. It includes a basic Laravel 10 setup with a `users` table and a `transactions` table. Your job is to implement the logic described below using best practices and clear code structure.
-
-## 🧠 Objective
-
-You are building part of a game system where users can earn, spend, and request payouts using an in-game currency (1 SCR = 1 EUR). Your job is to implement endpoints that provide a summary of users’ transactions and allow them to request payouts.
-
-The application will handle **millions of requests per day**, so your solution should consider performance, caching, and scalability.
+Provides a simple transaction-based payout system.
 
 ---
 
-## ✅ What’s Included in This Boilerplate
+### ✅ Assumptions Made
 
-- Laravel 10 setup
-- `User` model (default Laravel, integer IDs)
-- `Transaction` model and migration
-- SQLite-based database for quick setup
-- Factory and seeder to create users and transactions
+- Each user has `earned`, `spent`, and `payout` transactions, all stored in a unified `transactions` table.
+- Payouts have a `status`: `requested`, `approved`, or `paid`.
+- Users may only request payouts up to their current available balance.
+- Admins are responsible for approving payout requests.
+- Transactions use UUIDs
+- Caching strategy is time-sensitive (max 2-minute TTL)
+- All endpoints requiring authentication use Laravel Sanctum (`auth:sanctum`)
+
+---
+
+### ⚡️ Caching and Aggregation Strategy
+
+**Caching Summary Data**
+- User balance summaries (earned, spent, payout breakdown) are cached (duration is **2 minutes**) per user under the key `cache-summary-user-{userId}`
+- When transactions that affect balance are created or updated, the cache is **invalidated immediately**
+- Chose TTL caching over Laravel Scheduler because it offers a more lightweight, efficient solution for cache management, automatically handling expiration without the need for additional scheduled tasks
+---
+
+## 🔌 API Endpoints
+
+| Method | Endpoint                     | Description                                      |
+|--------|------------------------------|--------------------------------------------------|
+| GET    | /api/v1/summary              | Returns user's balance summary (cached)          |
+| GET    | /api/v1/payouts/requests     | Lists total requested payouts per user           |
+| POST   | /api/v1/users/{id}/payout    | Allows a user to request a payout                |
+| PATCH  | /api/v1/payouts/{id}/approve | Allows admin to approve a payout request         |
+
+---
+
+## ✅ Feature Test Classes
+
+#### `tests/Feature/PayoutRequestTest.php`
+#### `tests/Feature/ApprovePayoutTest.php`
+#### `tests/Feature/PayoutRequestListTest.php`
+#### `tests/Feature/UserTransactionSummaryTest.php`
+
+---
+
+## 🧪 Unit Test Classes & Cases
+
+#### `tests/Unit/UserTransactionSummaryServiceTest.php`
 
 ---
 
