@@ -28,7 +28,7 @@ Provides a simple transaction-based payout system.
 
 | Method | Endpoint                     | Description                                      |
 |--------|------------------------------|--------------------------------------------------|
-| GET    | /api/v1/summary              | Returns user's balance summary (cached)          |
+| GET    | /api/v1/users/{id}/summary   | Returns user's balance summary (cached)          |
 | GET    | /api/v1/payouts/requests     | Lists total requested payouts per user           |
 | POST   | /api/v1/users/{id}/payout    | Allows a user to request a payout                |
 | PATCH  | /api/v1/payouts/{id}/approve | Allows admin to approve a payout request         |
